@@ -8,7 +8,6 @@ import PolImg from '../../../public/PolImg.png';
 import Flakes from '../../../public/Politics/flakes.png'
 import Socca from '../../../public/Politics/Socca.png'
 import V from '../../../public/Politics/V.png'
-import Ads5 from '../../../public/Ads5.png';
 import ImageOverlay from '../components/ImageOverlay';
 import TopStoriesImage1 from '../../../public/Topstory1.png'
 import TopStoriesImage2 from '../../../public/Topstory2.png'

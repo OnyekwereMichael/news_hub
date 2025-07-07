@@ -3,9 +3,7 @@ import React from 'react';
 import NewsInPicture from '../../../public/NewsInPicture.png'
 
 import TopStoriesImage3 from '../../../public/Topstory3.png'
-// import TopStoriesImage4 from '../../../public/Topstory4.png'
 
-import Image from 'next/image';
 import ImageOverlay from './ImageOverlay';
 import SectionHeading from './SectionHeading';
 

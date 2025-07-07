@@ -3,13 +3,15 @@ import React from 'react';
 import { useAppSelector } from '../store';
 import { useCategoryStories } from '../hooks/query';
 import ImageOverlay from './ImageOverlay';
+import LoadingSpinner from './LoadingSpinner';
 
 const CategoryStories = () => {
   const selectedCategory = useAppSelector(state => state.selectedCategory);
   const { data, isLoading, isError } = useCategoryStories(selectedCategory);
 
   if (!selectedCategory) return null;
-  if (isLoading) return <div className="py-8 text-center">Loading stories...</div>;
+  if (isLoading) return  <LoadingSpinner />;
+
   if (isError || !data) return <div className="py-8 text-center text-red-500">Failed to load stories.</div>;
 
   return (

@@ -3,13 +3,14 @@ import React from 'react';
 import { useCategories } from '../hooks/query';
 import { useAppDispatch, useAppSelector } from '../store';
 import { setSelectedCategory } from '../store';
+import LoadingSpinner from './LoadingSpinner';
 
 const CategoriesNav = () => {
   const { data, isLoading, isError } = useCategories();
   const dispatch = useAppDispatch();
   const selectedCategory = useAppSelector(state => state.selectedCategory);
 
-  if (isLoading) return <div className="py-4 text-center">Loading categories...</div>;
+  if (isLoading) return <LoadingSpinner />
   if (isError || !data) return <div className="py-4 text-center text-red-500">Failed to load categories.</div>;
 
   return (

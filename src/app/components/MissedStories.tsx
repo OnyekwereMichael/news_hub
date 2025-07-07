@@ -11,12 +11,12 @@ import 'swiper/css/pagination';
 import Image from 'next/image'
 import { formatDate } from '../utils/formatDate';
 import { useMissedStories } from '../hooks/query'
+import SkeletonCard from './SkeletonCard';
 
 
 
 const MissedStories = () => {
   const { data, isLoading, isError } = useMissedStories();
-
   return (
     <div className='px-6 py-8 mx-auto bg-white'>
        <SectionHeading label='STORIES YOU MAY HAVE MISSED'/>
@@ -31,7 +31,23 @@ const MissedStories = () => {
            </button>
          </div>
          {isLoading ? (
-           <div className="py-8 text-center">Loading missed stories...</div>
+           <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={2}
+            slidesPerView={4}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 4 },
+            }}
+            className="w-full"
+          >
+            {[...Array(4)].map((_, idx) => (
+              <SwiperSlide key={idx}>
+                <SkeletonCard className="min-h-[120px] max-h-[200px]" />
+              </SwiperSlide>
+            ))}
+          </Swiper>
          ) : isError || !data ? (
            <div className="py-8 text-center text-red-500">Failed to load missed stories.</div>
          ) : (
@@ -48,7 +64,7 @@ const MissedStories = () => {
               bulletClass: 'inline-block w-2 h-2 mx-1 rounded-full bg-gray-300',
               bulletActiveClass: '!bg-[#F52A32] !w-3 !h-3',
             }}
-            spaceBetween={2}
+            spaceBetween={5}
             slidesPerView={4}
             breakpoints={{
               0: { slidesPerView: 1 },
@@ -62,7 +78,7 @@ const MissedStories = () => {
                  <div className="flex flex-col gap-1 mb-6">
                    <div className="flex items-start gap-2">
                      <span className="w-3 h-3 bg-[#282828] rounded-sm mt-1 flex-shrink-0"></span>
-                     <span className="text-[#282828] font-medium text-[20px] leading-8">{story.title}</span>
+                     <span className="text-[#282828] font-medium text-[18px] leading-8">{story.title}</span>
                    </div>
                    <div className="flex items-center gap-4 ml-5 mt-1 text-xs">
                      <span className="flex items-center gap-1 text-[#F52A32] font-semibold">
@@ -83,8 +99,8 @@ const MissedStories = () => {
          <div className="swiper-pagination-missed flex justify-center mt-4"></div>
          </div>
 
-<section className='flex items-center justify-between flex-wrap'>
-         <div className="text-center px-4 py-8">
+<section className='flex items-center gap-10 justify-between max-sm:flex-wrap'>
+         <div className="text-center px-4">
 <div className='flex gap-2 items-center'>
     <Image src={email} alt='email'/>
   <p className="text-[#464646] text-[18px] md:text-[20px] font-medium leading-8">

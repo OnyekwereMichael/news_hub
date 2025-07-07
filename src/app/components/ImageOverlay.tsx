@@ -28,7 +28,7 @@ const ImageOverlay = ({ src, alt, children, className = '', overlayClassName = '
             isBookmarked ? dispatch(removeBookmark(storyId)) : dispatch(addBookmark(storyId));
           }}
           className={`absolute top-2 left-2 z-10 p-1 rounded-full bg-white/80 hover:bg-[#F52A32] transition-colors ${
-            isBookmarked ? 'text-[#F52A32]' : 'text-gray-400 w-[100%] h-[100%]'
+            isBookmarked ? 'text-[#F52A32]' : 'text-gray-400 '
           }`}
           title={isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
         >
