@@ -34,7 +34,7 @@ const NewsInVideo = () => {
     <div className='bg-white px-6 mx-auto py-8'>
        <SectionHeading label='NEWS IN VIDEOS'/>
 
-       <div className='grid grid-cols-3 gap-6  '>
+       <div className='grid grid-cols-3 gap-6 max-md:grid-cols-2 max-sm:grid-cols-1 '>
            {NewInVideo.map((news, index) => (
                <div key={index} className="relative">
                    {/* World News button */}

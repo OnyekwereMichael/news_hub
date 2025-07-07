@@ -3,8 +3,9 @@ import SectionHeading from './SectionHeading'
 import Story1 from '../../../public/stories1.png'
 import Image from 'next/image'
 import Ads4 from '../../../public/Ads4.png'
+import SkeletonCard from './SkeletonCard';
 
-const Stories = () => {
+const Stories = ({ isLoading = false }) => {
     const details = [
         {
             label: "Binance: Nigeria orders cryptocurrency firm to pay $10bn"
@@ -27,6 +28,14 @@ const Stories = () => {
        <SectionHeading label="FEATURED STORIES" color="#7B61FF" />
 
 <section className='grid grid-cols-3 gap-6 max-sm:grid-cols-1'>
+       {isLoading ? (
+         <>
+           <SkeletonCard className="min-h-[400px] max-h-[600px]" />
+           <SkeletonCard className="min-h-[400px] max-h-[600px]" />
+           <SkeletonCard className="min-h-[400px] max-h-[600px]" />
+         </>
+       ) : (
+         <>
        <div>
          <Image src={Story1} alt=''/>
          <div className="rounded-b-lg p-6">
@@ -71,6 +80,8 @@ const Stories = () => {
        {/* sec 3 (ads img) */}
 
        <Image src={Ads4} alt='ads4'/>
+         </>
+       )}
        </section>
     </div>
   )

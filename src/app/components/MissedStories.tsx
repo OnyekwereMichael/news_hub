@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import SectionHeading from './SectionHeading'
 import Ads5 from '../../../public/Ads5.png'
 import email from '../../../public/email.png'
@@ -11,11 +11,15 @@ import 'swiper/css/pagination';
 import Image from 'next/image'
 import { formatDate } from '../utils/formatDate';
 import { useMissedStories } from '../hooks/query'
-
-
+import SkeletonCard from './SkeletonCard';
 
 const MissedStories = () => {
   const { data, isLoading, isError } = useMissedStories();
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
+  // Swiper needs the navigation elements to be available before initialization
+  useEffect(() => {}, []);
 
   return (
     <div className='px-6 py-8 mx-auto bg-white'>
@@ -23,24 +27,47 @@ const MissedStories = () => {
        <div className='mt-3 relative'>
          {/* Custom navigation buttons at top right */}
          <div className="absolute right-0 -top-10 flex gap-2 z-10">
-           <button className="swiper-button-prev-missed bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center shadow transition">
+           <button ref={prevRef} className="swiper-button-prev-missed text-black bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center shadow transition">
              <span className="text-xl">&#8592;</span>
            </button>
-           <button className="swiper-button-next-missed bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center shadow transition">
+           <button ref={nextRef} className="swiper-button-next-missed text-black bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center shadow transition">
              <span className="text-xl">&#8594;</span>
            </button>
          </div>
          {isLoading ? (
-           <div className="py-8 text-center">Loading missed stories...</div>
+           <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={2}
+            slidesPerView={4}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 4 },
+            }}
+            className="w-full"
+          >
+            {[...Array(4)].map((_, idx) => (
+              <SwiperSlide key={idx}>
+                <SkeletonCard className="min-h-[120px] max-h-[200px]" />
+              </SwiperSlide>
+            ))}
+          </Swiper>
          ) : isError || !data ? (
            <div className="py-8 text-center text-red-500">Failed to load missed stories.</div>
          ) : (
            <Swiper
             modules={[Navigation, Pagination]}
             navigation={{
-              nextEl: '.swiper-button-next-missed',
-              prevEl: '.swiper-button-prev-missed',
-              
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onInit={swiper => {
+              // @ts-ignore
+              swiper.params.navigation.prevEl = prevRef.current;
+              // @ts-ignore
+              swiper.params.navigation.nextEl = nextRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
             }}
             pagination={{
               el: '.swiper-pagination-missed',
@@ -48,7 +75,7 @@ const MissedStories = () => {
               bulletClass: 'inline-block w-2 h-2 mx-1 rounded-full bg-gray-300',
               bulletActiveClass: '!bg-[#F52A32] !w-3 !h-3',
             }}
-            spaceBetween={2}
+            spaceBetween={5}
             slidesPerView={4}
             breakpoints={{
               0: { slidesPerView: 1 },
@@ -62,7 +89,7 @@ const MissedStories = () => {
                  <div className="flex flex-col gap-1 mb-6">
                    <div className="flex items-start gap-2">
                      <span className="w-3 h-3 bg-[#282828] rounded-sm mt-1 flex-shrink-0"></span>
-                     <span className="text-[#282828] font-medium text-[20px] leading-8">{story.title}</span>
+                     <span className="text-[#282828] font-medium text-[18px] leading-8">{story.title}</span>
                    </div>
                    <div className="flex items-center gap-4 ml-5 mt-1 text-xs">
                      <span className="flex items-center gap-1 text-[#F52A32] font-semibold">
@@ -83,8 +110,8 @@ const MissedStories = () => {
          <div className="swiper-pagination-missed flex justify-center mt-4"></div>
          </div>
 
-<section className='flex items-center justify-between flex-wrap'>
-         <div className="text-center px-4 py-8">
+<section className='flex items-center gap-10 justify-between max-sm:flex-wrap'>
+         <div className="text-center px-4">
 <div className='flex gap-2 items-center'>
     <Image src={email} alt='email'/>
   <p className="text-[#464646] text-[18px] md:text-[20px] font-medium leading-8">

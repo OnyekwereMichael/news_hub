@@ -9,7 +9,7 @@ import pin from '../../../public/SocialLinks/pin.png'
 
 const Footer = () => {
   return (
-    <footer className="bg-[#2a2626] text-white px-6 py-10">
+    <footer className="bg-[#2a2626] text-white px-6 py-5">
     <div className="max-w-6xl  mx-auto">
     
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 my-6">

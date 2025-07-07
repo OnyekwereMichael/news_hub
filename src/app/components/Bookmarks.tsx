@@ -30,12 +30,12 @@ const Bookmarks = () => {
       .finally(() => setLoading(false));
   }, [bookmarks]);
 
-  if (loading) return <div className="py-8 text-center">Loading bookmarks...</div>;
+  if (loading) return <div className="py-8 text-center text-black">Loading bookmarks...</div>;
   if (error) return <div className="py-8 text-center text-red-500">{error}</div>;
   if (!stories.length) return <div className="py-8 text-center">No bookmarks yet.</div>;
 
   return (
-    <section className="py-8">
+    <section className="py-8 px-6 mx-auto">
       <h2 className="text-2xl font-bold mb-6 text-black">Bookmarked Stories</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {stories.map(story => (
