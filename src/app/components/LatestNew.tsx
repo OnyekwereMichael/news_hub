@@ -1,9 +1,6 @@
 "use client";
 import React from 'react'
 import ImageOverlay from './ImageOverlay'
-import TopStoriesImage2 from '../../../public/Topstory2.png'
-import Latest from '../../../public/latest1.png'
-import Latest2 from '../../../public/Latest2.png'
 import Ads2 from '../../../public/ads2.png'
 import Ads3 from '../../../public/ads3.png'
 import Image from 'next/image'
@@ -13,26 +10,27 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import SectionHeading from './SectionHeading';
-
-const slides = [
-  [
-    { src: Latest, title: 'Tinubu Mourns Actors, John Okafor and Quadri Oyebamiji' },
-    { src: Latest2, title: 'Over £2million given to world-class trans centre' },
-    { src: Latest, title: 'Over £2million given to world-class trans centre' },
-    { src: Latest, title: 'Over £2million given to world-class trans centre' },
-  ],
-];
+import { useFetchLatestNews } from '../hooks/query';
 
 const LatestNew = () => {
+  const { data, isLoading, isError } = useFetchLatestNews();
+
+  if (isLoading) {
+    return <div className="py-8 text-center text-black">Loading latest news...</div>;
+  }
+  if (isError || !data) {
+    return <div className="py-8 text-center text-red-500">Failed to load latest news.</div>;
+  }
+
   return (
     <div className="bg-gray-50 py-8 mx-auto px-6">
       <SectionHeading label='Latest News'/>
       {/* Swiper navigation buttons */}
       <div className="flex justify-end mb-4">
-        <div className="swiper-button-prev-latest cursor-pointer mr-2 bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center">
+        <div className="swiper-button-prev-latest cursor-pointer mr-2 bg-gray-200 text-black hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center">
           <span className="text-xl">&#8592;</span>
         </div>
-        <div className="swiper-button-next-latest cursor-pointer bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center">
+        <div className="swiper-button-next-latest cursor-pointer bg-gray-200 text-black hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center">
           <span className="text-xl">&#8594;</span>
         </div>
       </div>
@@ -42,27 +40,30 @@ const LatestNew = () => {
           nextEl: '.swiper-button-next-latest',
           prevEl: '.swiper-button-prev-latest',
         }}
-        spaceBetween={20}
-        slidesPerView={1}
+        spaceBetween={14}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 4 },
+        }}
         className="w-full"
       >
-        {slides.map((slide, idx) => (
-          <SwiperSlide key={idx}>
-            <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mt-3'>
-              {slide.map((item, i) => (
-                <div className="h-full" key={i}>
-                  <ImageOverlay
-                    src={item.src}
-                    alt="Main story"
-                    className="w-full h-full min-h-[400px] max-h-[600px] rounded-[10px]"
-                    overlayClassName="p-6 rounded-[10px]"
-                  >
-                    <h3 className="text-white font-bold text-xl mb-2">
-                      {item.title}
-                    </h3>
-                  </ImageOverlay>
-                </div>
-              ))}
+        {data.map((item: any) => (
+          <SwiperSlide key={item.id}>
+            <div className=''>
+              <div className="h-full w-full">
+                <ImageOverlay
+                  src={item.banner_image}
+                  alt={item.title}
+                  className="w-full h-full min-h-[400px] max-h-[600px] rounded-[10px]"
+                  overlayClassName="p-6 rounded-[10px]"
+                  unoptimized
+                >
+                  <h3 className="text-white font-bold text-xl mb-2">
+                    {item.title}
+                  </h3>
+                </ImageOverlay>
+              </div>
             </div>
           </SwiperSlide>
         ))}
@@ -75,21 +76,25 @@ const LatestNew = () => {
       {/* More stories  */}
       <div className="flex flex-col md:flex-row gap-8 h-full mt-20">
         <div className="flex-1">
-          <ImageOverlay
-            src={Latest2}
-            alt="Main story"
-            className="w-full h-full min-h-[400px] max-h-[600px]"
-            overlayClassName="p-6"
-          >
-            <h1 className="text-white font-bold text-xl mb-2">
-              Dangote Refinery's second crude oil shipment leaves US for Nigeria
-            </h1>
-            <h3 className="text-white font-bold text-xl mb-2">First cargo to arrive next week</h3>
-            <div className='flex gap-2 items-center'>
-              <p className='w-3 h-3 bg-[#F52A32] rounded-full'></p>
-              <h3>Ogechi Joseph</h3>
-            </div>
-          </ImageOverlay>
+          {/* Optionally show the first story in detail, or keep as is */}
+          {data[0] && (
+            <ImageOverlay
+              src={data[0].banner_image}
+              alt={data[0].title}
+              className="w-full h-full min-h-[400px] max-h-[600px]"
+              overlayClassName="p-6"
+              unoptimized
+            >
+              <h1 className="text-white font-bold text-xl mb-2">
+                {data[0].title}
+              </h1>
+              <h3 className="text-white font-bold text-xl mb-2">{data[0].subtitle}</h3>
+              <div className='flex gap-2 items-center'>
+                <p className='w-3 h-3 bg-[#F52A32] rounded-full'></p>
+                <h3>{data[0].author}</h3>
+              </div>
+            </ImageOverlay>
+          )}
         </div>
         <div className="w-full md:w-[350px] flex-shrink-0">
           <MoreStories />

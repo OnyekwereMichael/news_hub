@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import NavBar from './NavBar';
+import Footer from './Footer';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,7 +11,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <main className=" ">
         {children}
       </main>
-      {/* Footer will go here */}
+      <Footer />
     </div>
   );
 };
