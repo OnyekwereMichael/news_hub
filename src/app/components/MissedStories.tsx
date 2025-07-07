@@ -9,41 +9,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Image from 'next/image'
+import { formatDate } from '../utils/formatDate';
+import { useMissedStories } from '../hooks/query'
 
-const missedStories = [
-  {
-    label: "Binance: Nigeria orders cryptocurrency firm to pay $10bn",
-    date: "Feb 29, 2024",
-    category: "Finance"
-  },
-  {
-    label: "Rivers Community Protests Alleged Killing Of Indigenes By Militia",
-    date: "Feb 28, 2024",
-    category: "Politics"
-  },
-  {
-    label: "Former NGX Group Chairman Abimbola Ogunbanjo Laid To Rest",
-    date: "Feb 27, 2024",
-    category: "Business"
-  },
-  {
-    label: "Foden Sparkles As Man City Crush Spineless Man United ",
-    date: "Feb 26, 2024",
-    category: "Sports"
-  },
-  {
-    label: "Zamfara Verifies 3,079 Retirees, Settles N2.3bn Gratuity Backlog",
-    date: "Feb 25, 2024",
-    category: "Economy"
-  },
-  {
-    label: "New Tech Hubs Emerge Across Africa",
-    date: "Feb 24, 2024",
-    category: "Technology"
-  },
-]
+
 
 const MissedStories = () => {
+  const { data, isLoading, isError } = useMissedStories();
+
   return (
     <div className='px-6 py-8 mx-auto bg-white'>
        <SectionHeading label='STORIES YOU MAY HAVE MISSED'/>
@@ -57,48 +30,55 @@ const MissedStories = () => {
              <span className="text-xl">&#8594;</span>
            </button>
          </div>
-         <Swiper
-          modules={[Navigation, Pagination]}
-          navigation={{
-            nextEl: '.swiper-button-next-missed',
-            prevEl: '.swiper-button-prev-missed',
-          }}
-          pagination={{
-            el: '.swiper-pagination-missed',
-            clickable: true,
-            bulletClass: 'inline-block w-2 h-2 mx-1 rounded-full bg-gray-300',
-            bulletActiveClass: '!bg-[#F52A32] !w-3 !h-3',
-          }}
-          spaceBetween={2}
-          slidesPerView={4}
-          breakpoints={{
-            0: { slidesPerView: 1 },
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 4 },
-          }}
-          className="w-full"
-        >
-           {missedStories.map((story, i) => (
-             <SwiperSlide key={i}>
-               <div className="flex flex-col gap-1 mb-6">
-                 <div className="flex items-start gap-2">
-                   <span className="w-3 h-3 bg-[#282828] rounded-sm mt-1 flex-shrink-0"></span>
-                   <span className="text-[#282828] font-medium text-[20px] leading-8">{story.label}</span>
+         {isLoading ? (
+           <div className="py-8 text-center">Loading missed stories...</div>
+         ) : isError || !data ? (
+           <div className="py-8 text-center text-red-500">Failed to load missed stories.</div>
+         ) : (
+           <Swiper
+            modules={[Navigation, Pagination]}
+            navigation={{
+              nextEl: '.swiper-button-next-missed',
+              prevEl: '.swiper-button-prev-missed',
+              
+            }}
+            pagination={{
+              el: '.swiper-pagination-missed',
+              clickable: true,
+              bulletClass: 'inline-block w-2 h-2 mx-1 rounded-full bg-gray-300',
+              bulletActiveClass: '!bg-[#F52A32] !w-3 !h-3',
+            }}
+            spaceBetween={2}
+            slidesPerView={4}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 4 },
+            }}
+            className="w-full"
+          >
+             {data.map((story, i) => (
+               <SwiperSlide key={story.id}>
+                 <div className="flex flex-col gap-1 mb-6">
+                   <div className="flex items-start gap-2">
+                     <span className="w-3 h-3 bg-[#282828] rounded-sm mt-1 flex-shrink-0"></span>
+                     <span className="text-[#282828] font-medium text-[20px] leading-8">{story.title}</span>
+                   </div>
+                   <div className="flex items-center gap-4 ml-5 mt-1 text-xs">
+                     <span className="flex items-center gap-1 text-[#F52A32] font-semibold">
+                       <span className="w-2 h-2 bg-[#F52A32] rounded-full inline-block"></span>
+                       {formatDate(story.created_at)}
+                     </span>
+                     <span className="flex items-center gap-1 text-[#F52A32] font-semibold">
+                       <span className="w-2 h-2 bg-[#F52A32] rounded-full inline-block"></span>
+                       {story.category?.category_name}
+                     </span>
+                   </div>
                  </div>
-                 <div className="flex items-center gap-4 ml-5 mt-1 text-xs">
-                   <span className="flex items-center gap-1 text-[#F52A32] font-semibold">
-                     <span className="w-2 h-2 bg-[#F52A32] rounded-full inline-block"></span>
-                     {story.date}
-                   </span>
-                   <span className="flex items-center gap-1 text-[#F52A32] font-semibold">
-                     <span className="w-2 h-2 bg-[#F52A32] rounded-full inline-block"></span>
-                     {story.category}
-                   </span>
-                 </div>
-               </div>
-             </SwiperSlide>
-           ))}
-         </Swiper>
+               </SwiperSlide>
+             ))}
+           </Swiper>
+         )}
          {/* Custom pagination dots below the Swiper */}
          <div className="swiper-pagination-missed flex justify-center mt-4"></div>
          </div>

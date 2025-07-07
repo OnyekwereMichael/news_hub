@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import MainLayout from './components/MainLayout';
 import TopStories from './components/TopStories';
@@ -9,12 +10,19 @@ import Stories from "./components/Stories";
 import NewsInVideo from "./components/NewsInVideo";
 import NewsInPicture from "./components/NewsInPicture";
 import MissedStories from "./components/MissedStories";
-import Footer from "./components/Footer";
+
+import CategoriesNav from './components/CategoriesNav';
+import CategoryStories from './components/CategoryStories';
+import Bookmarks from './components/Bookmarks';
+import { useAppSelector } from './store';
+
 
 export default function HomePage() {
+  const selectedCategory = useAppSelector(state => state.selectedCategory);
   return (
     <MainLayout>
-      <TopStories />
+      <CategoriesNav />
+      {selectedCategory ? <CategoryStories /> : <TopStories />}
       <LatestNew />
       <PoliticsSection />
       <BusinessSection />
@@ -23,7 +31,7 @@ export default function HomePage() {
       <NewsInVideo />
       <NewsInPicture />
       <MissedStories />
-      <Footer />
+      <Bookmarks />
     </MainLayout>
   );
 }
