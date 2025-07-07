@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import SectionHeading from './SectionHeading'
 import Ads5 from '../../../public/Ads5.png'
 import email from '../../../public/email.png'
@@ -13,20 +13,24 @@ import { formatDate } from '../utils/formatDate';
 import { useMissedStories } from '../hooks/query'
 import SkeletonCard from './SkeletonCard';
 
-
-
 const MissedStories = () => {
   const { data, isLoading, isError } = useMissedStories();
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
+  // Swiper needs the navigation elements to be available before initialization
+  useEffect(() => {}, []);
+
   return (
     <div className='px-6 py-8 mx-auto bg-white'>
        <SectionHeading label='STORIES YOU MAY HAVE MISSED'/>
        <div className='mt-3 relative'>
          {/* Custom navigation buttons at top right */}
          <div className="absolute right-0 -top-10 flex gap-2 z-10">
-           <button className="swiper-button-prev-missed bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center shadow transition">
+           <button ref={prevRef} className="swiper-button-prev-missed text-black bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center shadow transition">
              <span className="text-xl">&#8592;</span>
            </button>
-           <button className="swiper-button-next-missed bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center shadow transition">
+           <button ref={nextRef} className="swiper-button-next-missed text-black bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center shadow transition">
              <span className="text-xl">&#8594;</span>
            </button>
          </div>
@@ -54,9 +58,16 @@ const MissedStories = () => {
            <Swiper
             modules={[Navigation, Pagination]}
             navigation={{
-              nextEl: '.swiper-button-next-missed',
-              prevEl: '.swiper-button-prev-missed',
-              
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onInit={swiper => {
+              // @ts-ignore
+              swiper.params.navigation.prevEl = prevRef.current;
+              // @ts-ignore
+              swiper.params.navigation.nextEl = nextRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
             }}
             pagination={{
               el: '.swiper-pagination-missed',

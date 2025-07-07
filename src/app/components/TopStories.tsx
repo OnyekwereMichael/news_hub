@@ -59,13 +59,13 @@ const TopStories = () => {
           </div>
           {/* Right: Stack 3 images vertically */}
           <div className="flex flex-col ">
-            <div className='grid grid-cols-2 gap-5 h-full'>
+            <div className='grid grid-cols-2 gap-5 h-full max-sm:grid-cols-1'>
               {sideStories.map((story, idx) => (
                 <ImageOverlay
                   key={story.id}
                   src={story.banner_image}
                   alt={story.title}
-                  className="w-full h-[100%] min-h-[120px] max-h-[200px]"
+                  className="w-full h-[100%] min-h-[120px] max-h-[200px] max-sm:min-h-[350px]"
                   overlayClassName="p-4"
                   unoptimized
                   storyId={story.id}

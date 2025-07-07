@@ -1,9 +1,7 @@
 'use client'
 import React from 'react';
 import NewsInPicture from '../../../public/NewsInPicture.png'
-
-import TopStoriesImage3 from '../../../public/Topstory3.png'
-
+import TopStoriesImage3 from '../../../public/TopStory3.png'
 import ImageOverlay from './ImageOverlay';
 import SectionHeading from './SectionHeading';
 
@@ -33,11 +31,11 @@ const NewInPictures = () => {
           </div>
           {/* Right: Stack 3 images vertically */}
           <div className="flex flex-col ">
-            <div className='grid grid-cols-2 gap-6 h-full'>
+            <div className='grid grid-cols-2 gap-6 h-full max-sm:grid-cols-1'>
             <ImageOverlay
               src={TopStoriesImage3}
               alt="Story 2"
-              className="w-full h-[100%] min-h-[120px] max-h-[200px]"
+              className="w-full h-[100%] min-h-[120px] max-h-[200px] max-sm:min-h-[350px]"
               overlayClassName="p-4"
             >
               <h3 className="text-white font-bold text-lg mb-1">
@@ -47,7 +45,7 @@ const NewInPictures = () => {
             <ImageOverlay
               src={TopStoriesImage3}
               alt="Story 3"
-              className="w-full h-[100%] min-h-[120px] max-h-[200px]"
+              className="w-full h-[100%] min-h-[120px] max-h-[200px] max-sm:min-h-[350px]"
               overlayClassName="p-4"
             >
               <h3 className="text-white font-bold text-lg mb-1">
@@ -55,11 +53,11 @@ const NewInPictures = () => {
               </h3>
             </ImageOverlay>
             </div>
-            <div className='grid grid-cols-2 gap-6 h-full mt-5'>
+            <div className='grid grid-cols-2 gap-6 h-full mt-5 max-sm:grid-cols-1'>
             <ImageOverlay
               src={TopStoriesImage3}
               alt="Story 4"
-              className="w-full h-[100%] min-h-[120px]"
+              className="w-full h-[100%] min-h-[120px] max-sm:min-h-[350px]"
               overlayClassName="p-4"
             >
               <h3 className="text-white font-bold text-lg mb-1">
@@ -69,7 +67,7 @@ const NewInPictures = () => {
             <ImageOverlay
               src={TopStoriesImage3}
               alt="Story 4"
-              className="w-full h-[100%] min-h-[120px]"
+              className="w-full h-[100%] min-h-[120px] max-sm:min-h-[350px]"
               overlayClassName="p-4"
             >
               <h3 className="text-white font-bold text-lg mb-1">

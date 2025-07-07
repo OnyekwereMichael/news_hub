@@ -20,11 +20,9 @@ const NavBar = () => {
   const handleCategoryClick = (categoryName: string) => {
     const cat = categories?.find((c: any) => c.category_name.toLowerCase() === categoryName.toLowerCase());
     if (cat) {
+      dispatch(setSelectedCategory(cat.category_id));
       if (categoryName.toLowerCase() === 'politics') {
-        dispatch(setSelectedCategory(cat.category_id));
-        router.push(`/politics?id=${cat.category_id}`);
-      } else {
-        dispatch(setSelectedCategory(cat.category_id));
+        router.push('/politics');
       }
     }
   };
