@@ -17,7 +17,6 @@ import { useAppSelector } from '../store';
 import { useCategories, useCategoryStories } from '../hooks/query';
 import { Category, Story } from '../types';
 
-
 // const mainStory = {
 //     image: PolImg,
 //     title: 'Putin promises grains, debt write-off as Russia seeks Africa allies',
