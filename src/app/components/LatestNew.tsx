@@ -77,6 +77,7 @@ const LatestNew = () => {
           }}
           className="w-full"
         >
+          
           {data.map((item: any) => (
             <SwiperSlide key={item.id}>
               <div className=''>
