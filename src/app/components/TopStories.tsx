@@ -3,10 +3,17 @@ import React from 'react';
 import ImageOverlay from './ImageOverlay';
 
 import SkeletonCard from './SkeletonCard';
-import { useTopStories } from '../hooks/query';
+import { TopStory } from '../types';
 
-const TopStories = () => {
-  const { data, isLoading, isError } = useTopStories();
+interface TopStoriesProps {
+  stories?: TopStory[];
+  isLoading?: boolean;
+  isError?: boolean;
+}
+
+const TopStories: React.FC<TopStoriesProps> = ({ stories, isLoading = false, isError = false }) => {
+  // If stories is provided, use it; otherwise, fallback to empty array
+  const data: TopStory[] = stories || [];
 
   if (isLoading) {
     return (
@@ -27,13 +34,13 @@ const TopStories = () => {
       </section>
     );
   }
-  if (isError || !data) {
+  if (isError || !data.length) {
     return <div className="py-8 text-center text-red-500">Failed to load top stories.</div>;
   }
 
   // Main story is the first, next two are side by side, last is below
   const mainStory = data[0]?.story;
-  const sideStories = data.slice(1, 3).map(s => s.story);
+  const sideStories = data.slice(1, 3).map((s: TopStory) => s.story);
   const lastStory = data[3]?.story;
 
   return (
@@ -59,7 +66,7 @@ const TopStories = () => {
           {/* Right: Stack 3 images vertically */}
           <div className="flex flex-col ">
             <div className='grid grid-cols-2 gap-5 h-full max-sm:grid-cols-1'>
-              {sideStories.map((story, idx) => (
+              {sideStories.map((story: any, idx: number) => (
                 <ImageOverlay
                   key={story.id}
                   src={story.banner_image}

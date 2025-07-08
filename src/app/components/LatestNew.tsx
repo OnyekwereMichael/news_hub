@@ -77,6 +77,7 @@ const LatestNew = () => {
           }}
           className="w-full"
         >
+          
           {data.map((item: any) => (
             <SwiperSlide key={item.id}>
               <div className=''>
@@ -87,6 +88,7 @@ const LatestNew = () => {
                     className="w-full h-full min-h-[400px] max-h-[600px] rounded-[10px]"
                     overlayClassName="p-6 rounded-[10px]"
                     unoptimized
+                    storyId={item.id}
                   >
                     <h3 className="text-white font-bold text-md mb-2">
                       {item.title}
@@ -114,6 +116,7 @@ const LatestNew = () => {
               className="w-full h-full min-h-[400px] max-h-[600px]"
               overlayClassName="p-6"
               unoptimized
+              storyId={data[0].id}
             >
               <h1 className="text-white font-bold text-xl mb-2">
                 {data[0].title}

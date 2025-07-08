@@ -26,6 +26,7 @@ const CategoryStories = () => {
             className="w-full h-[300px] rounded-lg"
             overlayClassName="p-4"
             unoptimized
+            storyId={story.id}
           >
             <h3 className="text-white font-bold text-lg mb-1">{story.title}</h3>
             <p className="text-white text-xs">{story.author}</p>

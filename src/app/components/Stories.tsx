@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SectionHeading from './SectionHeading'
 import Story1 from '../../../public/stories1.png'
 import Image from 'next/image'
@@ -6,6 +6,7 @@ import Ads4 from '../../../public/Ads4.png'
 import SkeletonCard from './SkeletonCard';
 
 const Stories = ({ isLoading = false }) => {
+    const [search, setSearch] = useState('');
     const details = [
         {
             label: "Binance: Nigeria orders cryptocurrency firm to pay $10bn"
@@ -23,9 +24,21 @@ const Stories = ({ isLoading = false }) => {
             label: "Zamfara Verifies 3,079 Retirees, Settles N2.3bn Gratuity Backlog"
         },
     ]
+    const filteredDetails = details.filter(det => det.label.toLowerCase().includes(search.toLowerCase()));
   return (
     <div className='w-full py-8 mx-auto px-6 bg-white'>
        <SectionHeading label="FEATURED STORIES" color="#7B61FF" />
+
+      {/* Search Bar */}
+      <div className="mb-6">
+        <input
+          type="text"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder="Search stories by title..."
+          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
 
 <section className='grid grid-cols-3 gap-6 max-sm:grid-cols-1'>
        {isLoading ? (
@@ -48,7 +61,7 @@ const Stories = ({ isLoading = false }) => {
           </div>
 
           <div>
-            {details.map((det, i) => (
+            {filteredDetails.map((det, i) => (
                 <div key={i}>
                     <p className='text-[18px] text-[#282828] mt-3'>{det.label}</p>
                 </div>
@@ -69,7 +82,7 @@ const Stories = ({ isLoading = false }) => {
           </div>
 
           <div>
-            {details.map((det, i) => (
+            {filteredDetails.map((det, i) => (
                 <div key={i}>
                     <p className='text-[18px] text-[#282828] mt-3'>{det.label}</p>
                 </div>
