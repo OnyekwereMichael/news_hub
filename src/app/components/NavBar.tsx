@@ -8,7 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useCategories } from '../hooks/query';
 import { useAppDispatch, useAppSelector, setSelectedCategory } from '../store';
 
-const mainCategories = ['Politics', 'Business', 'Sports', 'Entertainment'];
+const mainCategories = ['Politics', 'Business', 'Sports', 'Entertainment', 'Health', 'Tech', 'Opinion'];
 
 const NavBar = () => {
   const pathname = usePathname();
@@ -44,7 +44,7 @@ const NavBar = () => {
                 onClick={() => handleCategoryClick(cat)}
                 className={`hover:text-gray-300 focus:outline-none ${
                   categories && selectedCategory && categories.find((c: any) => c.category_id === selectedCategory)?.category_name.toLowerCase() === cat.toLowerCase()
-                    ? 'border-b-2 border-[#F52A32] text-white font-bold' : ''
+                    ? 'border-b-2 border-[#F52A32] text-white font-bold cursor-pointer' : 'font-semibold cursor-pointer'
                 }`}
                 style={{ background: 'none', border: 'none', padding: 0, margin: 0 }}
               >

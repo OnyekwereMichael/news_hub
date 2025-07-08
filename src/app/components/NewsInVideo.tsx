@@ -2,6 +2,8 @@ import React from 'react'
 import SectionHeading from './SectionHeading'
 import NewInVid from '../../../public/NewInVideo1.png'
 import Image from 'next/image'
+import Story1 from '../../../public/stories1.png'
+import PoliticsMainImg from '../../../public/PolImg.png';
 
 const NewsInVideo = () => {
     const NewInVideo = [
@@ -10,24 +12,24 @@ const NewsInVideo = () => {
          label: "US storm: Massive blizzard hits California and Nevada"
         },
         {
-         img: NewInVid,
-          label: "US storm: Massive blizzard hits California and Nevada"
+         img: Story1,
+          label: "Any red line for the falling naira? "
         },
         {
          img: NewInVid,
           label: "US storm: Massive blizzard hits California and Nevada"
         },
         {
-         img: NewInVid,
-         label: "US storm: Massive blizzard hits California and Nevada"
+         img: Story1,
+         label: "Falana Asks FG To Review Fuel Subsidy Removal"
         },
         {
          img: NewInVid,
           label: "US storm: Massive blizzard hits California and Nevada"
         },
         {
-         img: NewInVid,
-          label: "US storm: Massive blizzard hits California and Nevada"
+         img: PoliticsMainImg,
+          label: "Falana Asks FG To Review Fuel Subsidy Removal"
         },
     ]
   return (
@@ -46,7 +48,7 @@ const NewsInVideo = () => {
                        alt="News in video thumbnail"
                        width={400}
                        height={300}
-                       className="w-full h-auto"
+                       className="w-full h-[80%]"
                    />
                    {/* Play button overlay */}
                    <div className="absolute inset-0 flex items-center justify-center">

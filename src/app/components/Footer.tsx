@@ -9,7 +9,7 @@ import pin from '../../../public/SocialLinks/pin.png'
 
 const Footer = () => {
   return (
-    <footer className="bg-[#2a2626] text-white px-6 py-5">
+    <footer className="bg-[#2D2A2A] text-white px-6 py-5">
     <div className="max-w-6xl  mx-auto">
     
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 my-6">
@@ -48,22 +48,22 @@ const Footer = () => {
           <p>Africa</p>
           <p>Politics</p>
         </div>
-        <div className="space-y-3 font-medium text-[18px]">
+        <div className="space-y-3 font-medium text-[16px]">
           <p>Business</p>
           <p>Sport</p>
           <p>Health</p>
         </div>
-        <div className="space-y-3 font-medium text-[18px]">
+        <div className="space-y-3 font-medium text-[16px]">
           <p className=''>Tech</p>
           <p>Opinion</p>
           <p>Videos</p>
         </div>
-        <div className="space-y-3 font-medium text-[18px]">
+        <div className="space-y-3 font-medium text-[16px]">
           <p>Photos</p>
           <p>AGC Archive</p>
           <p>Privacy Policy</p>
         </div>
-        <div className="space-y-3 font-medium text-[18px]">
+        <div className="space-y-3 font-medium text-[16px]">
           <p>About Us</p>
           <p>Contact Us</p>
           <p>Advert Rate</p>
