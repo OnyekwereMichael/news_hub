@@ -8,6 +8,7 @@ import {
   addBookmark,
   removeBookmark,
 } from '../store';
+import Link from 'next/link';
 
 interface ImageOverlayProps {
   src: any;
@@ -42,21 +43,23 @@ const ImageOverlay = ({
     }
   };
 
-  return (
-    <div className={`relative ${className}`}>
-      <Image
-        src={src}
-        alt={alt}
-        className="w-full h-full object-cover"
-        fill
-        unoptimized={unoptimized}
-      />
-
-      {storyId !== undefined && (
+ // ... existing code ...
+return (
+  <div className={`relative ${className}`}>
+    {storyId !== undefined ? (
+      <Link href={`/stories/${storyId}`} className="block group" prefetch={false}>
+        <Image
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover cursor-pointer"
+          fill
+          unoptimized={unoptimized}
+        />
         <button
           onClick={(e) => {
+            e.preventDefault();
             e.stopPropagation();
-            handleBookmarkToggle(); 
+            handleBookmarkToggle();
           }}
           className={`absolute top-2 left-2 z-10 p-1 rounded-full bg-white/80 hover:bg-[#F52A32] transition-colors ${
             isBookmarked ? 'text-[#F52A32]' : 'text-gray-400'
@@ -65,15 +68,30 @@ const ImageOverlay = ({
         >
           {isBookmarked ? '★' : '☆'}
         </button>
-      )}
-
-      <div
-        className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent ${overlayClassName}`}
-      >
-        {children}
-      </div>
-    </div>
-  );
+        <div
+          className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent ${overlayClassName}`}
+        >
+          {children}
+        </div>
+      </Link>
+    ) : (
+      <>
+        <Image
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover"
+          fill
+          unoptimized={unoptimized}
+        />
+        <div
+          className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent ${overlayClassName}`}
+        >
+          {children}
+        </div>
+      </>
+    )}
+  </div>
+);
 };
 
 export default ImageOverlay;
