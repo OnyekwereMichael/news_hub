@@ -115,6 +115,7 @@ const Header = () => {
               <Image src={X} alt="X" className="w-5 h-5" />
               <Image src={pin} alt="Heart" className="w-5 h-5" />
               <Image src={linkedin} alt="LinkedIn" className="w-5 h-5" />
+              
             </div>
           </div>
         </div>
