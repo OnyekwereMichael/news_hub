@@ -10,7 +10,7 @@ import Socca from '../../../public/Politics/Socca.png'
 import V from '../../../public/Politics/V.png'
 import ImageOverlay from '../components/ImageOverlay';
 import TopStoriesImage1 from '../../../public/Topstory1.png'
-import TopStoriesImage2 from '../../../public/Topstory2.png'
+import TopStoriesImage2 from '../../../public/TopStory2.png'
 import TopStoriesImage3 from '../../../public/TopStory3.png'
 import PoliticsStoryCard from '../components/politcs/PoliticsStoryCard';
 import { useAppSelector } from '../store';
