@@ -34,7 +34,7 @@ const NavBar = () => {
   return (
     <nav className="bg-black text-white">
       <div className='flex justify-center items-center mt-6'>
-        <Image src={Ads} alt="Ad" />
+        <Image src={Ads} alt="Ad" className='max-sm:p-3'/>
       </div>
       <div className="flex items-center justify-between py-4 px-4">
         <div className="flex items-center space-x-4">

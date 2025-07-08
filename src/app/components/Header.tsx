@@ -81,7 +81,7 @@ const Header = () => {
   return (
     <header>
       <div className="bg-[#D32C89] text-white px-4 py-3">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between text-[12px]">
+        <div className="max-w-7xl mx-auto flex items-center flex-row md:flex-row md:items-center md:justify-between text-[12px]">
           {/* Top row: links (collapsible on mobile) */}
           <div className="flex items-center justify-between md:justify-start w-full">
             <div className="flex items-center space-x-4 max-md:hidden">
@@ -92,30 +92,33 @@ const Header = () => {
               ))}
             </div>
             {/* Hamburger for mobile */}
-            <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <button
+              className="md:hidden p-2 rounded-md border border-white/20 bg-white/10 hover:bg-white/20 transition flex items-center justify-center"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
           </div>
           {/* Mobile menu */}
           {menuOpen && (
-            <div className="flex flex-col space-y-2 mt-2 md:hidden animate-fade-in">
+            <div className="flex flex-col space-y-2 mt-2 md:hidden animate-fade-in bg-white text-[#D32C89] rounded-lg shadow-lg p-4 absolute left-4 right-4 top-16 z-50">
               {HeaderLink.map((Header, i) => (
-                <Link key={i} href={Header.link} className='text-[14px] block'>{Header.label}</Link>
+                <Link key={i} href={Header.link} className='text-[15px] text-left font-semibold py-2 px-2 hover:bg-[#f3e6f1] rounded transition'>{Header.label}</Link>
               ))}
             </div>
           )}
           {/* Bottom row: date and socials */}
           <div className="flex flex-col md:flex-row md:items-center md:space-x-6 mt-2 md:mt-0 w-full md:w-[28rem] justify-between">
-            <span className="mb-2 md:mb-0">Sunday, March 3, 2024</span>
+            <span className="mb-2 md:mb-0 max-sm:hidden">Sunday, March 3, 2024</span>
             <div className="flex items-center gap-4">
-              <Image src={Instagram} alt="Instagram" className="w-5 h-5" />
-              <Image src={Facebook} alt="Facebook" className="w-5 h-5" />
-              <Image src={X} alt="X" className="w-5 h-5" />
-              <Image src={pin} alt="Heart" className="w-5 h-5" />
-              <Image src={linkedin} alt="LinkedIn" className="w-5 h-5" />
-              
+              <Image src={Instagram} alt="Instagram" className="w-5 h-5 max-sm:w-6 max-sm:h-6" />
+              <Image src={Facebook} alt="Facebook" className="w-5 h-5 max-sm:w-6 max-sm:h-6" />
+              <Image src={X} alt="X" className="w-5 h-5 max-sm:w-6 max-sm:h-6" />
+              <Image src={pin} alt="Heart" className="w-5 h-5 max-sm:w-6 max-sm:h-6" />
+              <Image src={linkedin} alt="LinkedIn" className="w-5 h-5 max-sm:w-6 max-sm:h-6" />
             </div>
           </div>
         </div>
