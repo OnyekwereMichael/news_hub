@@ -1,81 +1,39 @@
 
-export interface MissedStory {
-    id: number;
-    title: string;
-    subtitle: string;
-    description: string;
-    status: string;
-    type: string;
-    author: string;
-    content: string;
-    featured: string;
-    views: number;
-    editors_pick: any;
-    top_story: any;
-    category: {
-      category_id: number;
-      category_name: string;
-      total_stories: number | null;
-      created_at: string;
-      updated_at: string;
-    };
-    banner_image: string;
-    created_at: string;
-    updated_at: string;
-  }
+export interface Category {
+  category_id: number;
+  category_name: string;
+  total_stories: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Story {
+  id: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  status: string;
+  type: string;
+  author: string;
+  content: string;
+  featured: string;
+  views: number;
+  editors_pick: boolean;
+  top_story: boolean;
+  category: Category;
+  banner_image: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export type MissedStory = Story;
   
   
-  export interface LatestNews {
-    id: number;
-    title: string;
-    subtitle: string;
-    description: string;
-    status: string;
-    type: string;
-    author: string;
-    content: string;
-    featured: string;
-    views: number;
-    editors_pick: any;
-    top_story: any;
-    category: {
-      category_id: number;
-      category_name: string;
-      total_stories: number | null;
-      created_at: string;
-      updated_at: string;
-    };
-    banner_image: string;
-    created_at: string;
-    updated_at: string;
-  }
+  export type LatestNews = Story;
 
   export interface TopStory {
     id: number;
-    story: {
-      id: number;
-      title: string;
-      subtitle: string;
-      description: string;
-      status: string;
-      type: string;
-      author: string;
-      content: string;
-      featured: string;
-      views: number;
-      editors_pick: any;
-      top_story: any;
-      category: {
-        category_id: number;
-        category_name: string;
-        total_stories: number | null;
-        created_at: string;
-        updated_at: string;
-      };
-      banner_image: string;
-      created_at: string;
-      updated_at: string;
-    };
+    story: Story;
     created_at: string;
     updated_at: string;
   }

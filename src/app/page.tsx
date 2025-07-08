@@ -1,5 +1,4 @@
 'use client'
-import Image from "next/image";
 import MainLayout from './components/MainLayout';
 import TopStories from './components/TopStories';
 import LatestNew from './components/LatestNew';

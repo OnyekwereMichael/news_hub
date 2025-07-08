@@ -1,5 +1,5 @@
 'use client'
-import { LatestNews, MissedStory, TopStory } from '@/app/types';
+import { LatestNews, MissedStory, TopStory, Story } from '@/app/types';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -81,7 +81,7 @@ export const useMissedStories = () =>
           queryFn: async () => {
             const { data } = await axios.get('https://api.agcnewsnet.com/api/general/editor-picks?page=1&per_page=15');
             return Array.isArray(data?.data?.data)
-              ? data.data.data.filter((item: any) => item.story)
+              ? data.data.data.filter((item: { story: Story }) => item.story)
               : [];
           },
         });
