@@ -3,8 +3,8 @@ import React from 'react';
 
 const LoadingSpinner = () => {
   return (
-    <div className="tw:flex tw:items-center tw:justify-center tw:h-full bg-black">
-      <div className="tw:w-8 tw:h-8 tw:border-4 tw:border-blue-500 tw:border-t-transparent tw:rounded-full tw:animate-spin" />
+    <div className="flex items-center justify-center h-full">
+      <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
     </div>
   );
 };
