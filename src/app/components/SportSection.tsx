@@ -22,7 +22,7 @@ const SportSection = () => (
             <Image src={SportImg} alt="Politics main" className="w-full h-[340px] object-cover" />
           </div>
           <div className="rounded-b-lg p-6">
-            <h2 className="text-[#282828] text-2xl font-bold mb-2">Mbappe 'collision' hampers deal with obstacle preventing 'agreement' with next club
+            <h2 className="text-[#282828] text-2xl font-bold mb-2">Mbappe &apos;collision&apos; hampers deal with obstacle preventing &apos;agreement&apos; with next club
             </h2>
             <p className="text-[#888] text-base mb-6">Human rights lawyer Femi Falana (SAN) wants the Federal Government to review the fuel subsidy removal policy owing to claims that Nigeria is still paying for it.  </p>
             <div className="flex items-center gap-4 text-xs">

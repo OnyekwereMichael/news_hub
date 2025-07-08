@@ -62,9 +62,9 @@ const MissedStories = () => {
               nextEl: nextRef.current,
             }}
             onInit={swiper => {
-              // @ts-ignore
+              // @ts-expect-error - Swiper navigation element assignment
               swiper.params.navigation.prevEl = prevRef.current;
-              // @ts-ignore
+              // @ts-expect-error - Swiper navigation element assignment
               swiper.params.navigation.nextEl = nextRef.current;
               swiper.navigation.init();
               swiper.navigation.update();

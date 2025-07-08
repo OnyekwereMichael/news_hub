@@ -11,49 +11,50 @@ import V from '../../../public/Politics/V.png'
 import ImageOverlay from '../components/ImageOverlay';
 import TopStoriesImage1 from '../../../public/Topstory1.png'
 import TopStoriesImage2 from '../../../public/Topstory2.png'
-import TopStoriesImage3 from '../../../public/Topstory3.png'
+import TopStoriesImage3 from '../../../public/TopStory3.png'
 import PoliticsStoryCard from '../components/politcs/PoliticsStoryCard';
 import { useAppSelector } from '../store';
 import { useCategories, useCategoryStories } from '../hooks/query';
+import { Category, Story } from '../types';
 
-const mainStory = {
-    image: PolImg,
-    title: 'Putin promises grains, debt write-off as Russia seeks Africa allies',
-    date: 'LATEST TODAY',
-    description: '',
-    category: 'Africa allies',
-};
+// const mainStory = {
+//     image: PolImg,
+//     title: 'Putin promises grains, debt write-off as Russia seeks Africa allies',
+//     date: 'LATEST TODAY',
+//     description: '',
+//     category: 'Africa allies',
+// };
 
-const sideStories = [
-    {
-        image: Flakes,
-        title: 'Tinubu Mourns Actors, John Okafor and Quadri Oyebamiji',
-        date: 'NEWS',
-        description: '',
-        category: '',
-    },
-    {
-        image: PolImg,
-        title: 'Tinubu Mourns Actors, John Okafor and Quadri Oyebamiji',
-        date: 'NEWS',
-        description: '',
-        category: '',
-    },
-    {
-        image: PolImg,
-        title: 'Tinubu Mourns Actors, John Okafor and Quadri Oyebamiji',
-        date: 'NEWS TODAY',
-        description: '',
-        category: '',
-    },
-];
+// const sideStories = [
+//     {
+//         image: Flakes,
+//         title: 'Tinubu Mourns Actors, John Okafor and Quadri Oyebamiji',
+//         date: 'NEWS',
+//         description: '',
+//         category: '',
+//     },
+//     {
+//         image: PolImg,
+//         title: 'Tinubu Mourns Actors, John Okafor and Quadri Oyebamiji',
+//         date: 'NEWS',
+//         description: '',
+//         category: '',
+//     },
+//     {
+//         image: PolImg,
+//         title: 'Tinubu Mourns Actors, John Okafor and Quadri Oyebamiji',
+//         date: 'NEWS TODAY',
+//         description: '',
+//         category: '',
+//     },
+// ];
 
 const PoliticsPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const { data: categories } = useCategories();
     const selectedCategory = useAppSelector(state => state.selectedCategory);
     // Find the politics category id if no category is selected
-    const politicsCategory = categories?.find((c: any) => c.category_name.toLowerCase() === 'politics');
+    const politicsCategory = categories?.find((c: Category) => c.category_name.toLowerCase() === 'politics');
     const categoryId = selectedCategory || politicsCategory?.category_id || null;
     const { data: stories = [], isLoading } = useCategoryStories(categoryId);
     const totalPages = Math.ceil(stories.length / 10) || 1;
@@ -131,7 +132,7 @@ const PoliticsPage = () => {
                         ) : paginatedStories.length === 0 ? (
                           <div>No stories found.</div>
                         ) : (
-                          paginatedStories.map((story: any, idx: number) => (
+                          paginatedStories.map((story: Story, idx: number) => (
                             <PoliticsStoryCard
                               key={story.id || idx}
                               image={story.banner_image || PolImg}
